@@ -19,7 +19,7 @@ typedef struct
 
 void init_stack(StackType* s)
 {
-	 s->top = -1;
+	s->top = -1;
 }
 
 int is_full(StackType* s)
@@ -111,34 +111,38 @@ int main(void)
 	int idx = 0;
 	rec[idx++] = here;
 
-	printf("\n1번째 미로의 이동경로 -> (%d, %d)\n\n", here.r, here.c);
-	while (maze[here.r][here.c] != 'x')
-	{
-		r = here.r;
-		c = here.c;
-		maze[r][c] = '.';
-		maze_print(maze);
-		push_loc(&s, r - 1, c);
-		push_loc(&s, r + 1, c);
-		push_loc(&s, r, c - 1);
-		push_loc(&s, r, c + 1);
-		if (is_empty(&s))
+	int n = 0;
+	for (int i = 0; i < 2; i++) {
+		printf("\n1번째 미로의 이동경로 -> (%d, %d)\n\n", here.r, here.c);
+		element here = { 1,0 };
+		while (maze[here.r][here.c] != 'x')
 		{
-			printf("실패\n");
-			return;
+			r = here.r;
+			c = here.c;
+			maze[r][c] = '.';
+			maze_print(maze);
+			push_loc(&s, r - 1, c);
+			push_loc(&s, r + 1, c);
+			push_loc(&s, r, c - 1);
+			push_loc(&s, r, c + 1);
+			if (is_empty(&s))
+			{
+				printf("실패\n");
+				return;
+			}
+			else {
+				here = pop(&s);
+				rec[idx++] = here;
+				printf("\n%d번째 미로의 현재경로 -> (%d, %d)\n\n", num++, here.r, here.c);
+			}
 		}
-		else {
-			here = pop(&s);
-			rec[idx++] = here;
-			printf("\n%d번째 미로의 현재경로 -> (%d, %d)\n\n", num++, here.r, here.c);
+
+		printf("\n탈출성공\n\n");
+		printf("\n========== 미로의 총 이동경로 ==========\n\n");
+		for (int i = 0; i < idx; i++) {
+			printf("(%d, %d) -> ", rec[i].r, rec[i].c);
 		}
+		printf("도착");
 	}
-		
-	printf("\n탈출성공\n\n");
-	printf("\n========== 미로의 총 이동경로 ==========\n\n");
-	for (int i = 0; i < idx; i++) {
-		printf("(%d, %d) -> ", rec[i].r, rec[i].c);
-	}
-	printf("도착");
-    return 0;
+	return 0;
 }
