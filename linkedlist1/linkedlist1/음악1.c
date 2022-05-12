@@ -41,9 +41,9 @@ LinkNode* insert_node(LinkNode* head, char m[], char s[], char g, int y) { // 오
 				// node의 음악이 nextnode 음악보다 작을경우
 				if (node->link == NULL || strcmp(node->link, nextnode->data.music) >= 0) {
 					// node의 음악이 nextnode 음악보다 작고 node의 다음이 NULL이거나 node 다음의 음악이 nextnode 음악보다 클경우 그 전에 삽입
-				nextnode->link = node->link;
-				node->link = nextnode;
-				return head;
+					nextnode->link = node->link;
+					node->link = nextnode;
+					return head;
 				}
 				node = node->link; // 아닐경우 node를 다음으로 이동시켜 만족할때까지 비교
 			}
@@ -71,7 +71,7 @@ void list_display(LinkNode* head) { // 현재 리스트에 연결된 노드 데이터 출력
 	printf("NULL\n");
 }
 
-LinkNode* delete_node (LinkNode* head, char name[]) { // 음악 제목 삭제 함수
+LinkNode* delete_node(LinkNode* head, char name[]) { // 음악 제목 삭제 함수
 	LinkNode* removed;
 	LinkNode* dnode = head;
 	int n = 0;
@@ -101,11 +101,11 @@ LinkNode* delete_node (LinkNode* head, char name[]) { // 음악 제목 삭제 함수
 }
 
 int main(void) {
-    LinkNode* head = NULL;
-    char m[10];
-    char s[10];
-    char g;
-    int y,n;
+	LinkNode* head = NULL;
+	char m[10];
+	char s[10];
+	char g;
+	int y, n;
 
 	while (1) {
 		printf("\n1. 입력 2. 노드 출력 3. 갯수 출력 4. 노드 삭제 5. 종료\n");
